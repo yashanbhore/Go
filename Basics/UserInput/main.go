@@ -6,9 +6,16 @@ import (
 	"os"
 )
 
-func main(){
+func main() {
 	greet := "Heloo "
 	fmt.Print(greet)
 
-	reader  := bufio.NewReadWriter(os.Stdin)
+	// Buffio
+
+	reader := bufio.NewReader(os.Stdin)
+
+	// error or syntax
+	na, _ := reader.ReadString('\n') // this returns 2  values
+
+	fmt.Print(na)
 }

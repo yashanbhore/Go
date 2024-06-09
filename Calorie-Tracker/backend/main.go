@@ -15,13 +15,13 @@ func main() {
 
 	router.POST("/entry/create", routes.AddEntry)
 	router.GET("/entries", routes.GetEntries)
-	router.GET("/entry/:id", routes.EntryById)
-	router.GET("/ingredients/:ingredients", routes.EntryById)
+	router.GET("/entry/:id", routes.GetEntryById)
+	router.GET("/ingredients/:ingredients", routes.GetEntriesByIngredients)
 
 	router.PUT("/ingredients/update/:id",routes.UpdateIngredients)
 
 	router.PUT("/entry/update/:id", routes.UpdateEntry)
-	router.PUT("/entry/delete/:id", routes.DeleteEntry)
+	router.DELETE("/entry/delete/:id", routes.DeleteEntry)
 	
 	router.RUN(":"+port)
 }
