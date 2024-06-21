@@ -1,0 +1,353 @@
+Go Decision Control Structures
+1. if Statement
+The if statement executes a block of code if the specified condition is true.
+
+Syntax:
+
+go
+Copy code
+if condition {
+    // code to execute if condition is true
+}
+Example:
+
+go
+Copy code
+package main
+
+import "fmt"
+
+func main() {
+    x := 10
+    if x > 5 {
+        fmt.Println("x is greater than 5")
+    }
+}
+2. if-else Statement
+The if-else statement executes one block of code if the condition is true and another block if the condition is false.
+
+Syntax:
+
+go
+Copy code
+if condition {
+    // code to execute if condition is true
+} else {
+    // code to execute if condition is false
+}
+Example:
+
+go
+Copy code
+package main
+
+import "fmt"
+
+func main() {
+    x := 4
+    if x > 5 {
+        fmt.Println("x is greater than 5")
+    } else {
+        fmt.Println("x is not greater than 5")
+    }
+}
+3. if-else if-else Statement
+The if-else if-else statement allows you to check multiple conditions sequentially.
+
+Syntax:
+
+go
+Copy code
+if condition1 {
+    // code to execute if condition1 is true
+} else if condition2 {
+    // code to execute if condition2 is true
+} else {
+    // code to execute if both conditions are false
+}
+Example:
+
+go
+Copy code
+package main
+
+import "fmt"
+
+func main() {
+    x := 10
+    if x < 5 {
+        fmt.Println("x is less than 5")
+    } else if x > 5 {
+        fmt.Println("x is greater than 5")
+    } else {
+        fmt.Println("x is equal to 5")
+    }
+}
+4. switch Statement
+The switch statement is used to execute one block of code among many based on the value of a variable or an expression.
+
+Syntax:
+
+go
+Copy code
+switch expression {
+case value1:
+    // code to execute if expression == value1
+case value2:
+    // code to execute if expression == value2
+default:
+    // code to execute if none of the cases match
+}
+Example:
+
+go
+Copy code
+package main
+
+import "fmt"
+
+func main() {
+    day := "Tuesday"
+    switch day {
+    case "Monday":
+        fmt.Println("Today is Monday")
+    case "Tuesday":
+        fmt.Println("Today is Tuesday")
+    case "Wednesday":
+        fmt.Println("Today is Wednesday")
+    default:
+        fmt.Println("Today is not Monday, Tuesday, or Wednesday")
+    }
+}
+5. switch with fallthrough
+In Go, fallthrough is used to transfer control to the next case within the same switch.
+
+Syntax:
+
+go
+Copy code
+switch expression {
+case value1:
+    // code to execute if expression == value1
+    fallthrough
+case value2:
+    // code to execute if fallthrough from above case or expression == value2
+default:
+    // code to execute if none of the cases match
+}
+Example:
+
+go
+Copy code
+package main
+
+import "fmt"
+
+func main() {
+    num := 2
+    switch num {
+    case 1:
+        fmt.Println("One")
+        fallthrough
+    case 2:
+        fmt.Println("Two")
+        fallthrough
+    case 3:
+        fmt.Println("Three")
+    default:
+        fmt.Println("Number is not 1, 2, or 3")
+    }
+}
+6. switch with no condition
+You can use a switch statement without an expression, which behaves like multiple if-else statements.
+
+Syntax:
+
+go
+Copy code
+switch {
+case condition1:
+    // code to execute if condition1 is true
+case condition2:
+    // code to execute if condition2 is true
+default:
+    // code to execute if none of the conditions are true
+}
+Example:
+
+go
+Copy code
+package main
+
+import "fmt"
+
+func main() {
+    x := 7
+    switch {
+    case x < 5:
+        fmt.Println("x is less than 5")
+    case x > 5:
+        fmt.Println("x is greater than 5")
+    default:
+        fmt.Println("x is equal to 5")
+    }
+}
+Summary
+if statement: Checks a single condition.
+if-else statement: Checks a condition and provides an alternative if the condition is false.
+if-else if-else statement: Checks multiple conditions in sequence.
+switch statement: Selects a block of code to execute based on the value of an expression.
+fallthrough in switch: Allows execution to fall through to the next case.
+switch with no condition: Equivalent to multiple if-else statements, used for checking multiple conditions.
+These are the main decision control structures in Go. They help you make decisions in your code and control the flow of execution based on various conditions.
+
+Real-World Scenarios for fallthrough
+Grouped Case Handling
+Sometimes, multiple cases might share some common logic that needs to be executed. Using fallthrough, you can avoid code duplication by grouping the common logic in subsequent cases.
+
+Range Checking
+When you need to handle ranges of values where the boundaries of these ranges require similar handling.
+
+Simplified Control Flow
+In some complex control flows, using fallthrough can simplify the logic by reducing the need for nested if-else statements.
+
+Example Scenarios
+Grouped Case Handling
+Imagine you have an application where you want to classify numbers into categories. For example, consider a grading system where scores fall into different categories, but you want to log a common message for all passing grades.
+
+Example:
+
+go
+Copy code
+package main
+
+import "fmt"
+
+func main() {
+    score := 85
+
+    switch {
+    case score >= 90:
+        fmt.Println("Grade: A")
+        fallthrough
+    case score >= 80:
+        fmt.Println("Good job! You passed.")
+        fallthrough
+    case score >= 70:
+        fmt.Println("Grade: B")
+        fallthrough
+    case score >= 60:
+        fmt.Println("Grade: C")
+    default:
+        fmt.Println("Grade: F")
+    }
+}
+Output:
+
+makefile
+Copy code
+Grade: A
+Good job! You passed.
+Grade: B
+Grade: C
+Range Checking
+Consider a scenario where you need to handle different age groups and print some common message for adults.
+
+Example:
+
+go
+Copy code
+package main
+
+import "fmt"
+
+func main() {
+    age := 25
+
+    switch {
+    case age < 13:
+        fmt.Println("Child")
+    case age >= 13 && age < 18:
+        fmt.Println("Teenager")
+    case age >= 18 && age < 65:
+        fmt.Println("Adult")
+        fallthrough
+    case age >= 65:
+        fmt.Println("Senior Citizen")
+    default:
+        fmt.Println("Invalid age")
+    }
+}
+Output:
+
+Copy code
+Adult
+Senior Citizen
+Practical Example with fallthrough
+Scenario:
+If you scored more than 60, you get ice cream. If more than 70, then ice cream + Mobile, if more than 80, ice cream + Mobile + Bike, if more than 90, then ice cream + Mobile + Bike + Goa Trip.
+
+Example:
+
+go
+Copy code
+package main
+
+import (
+    "bufio"
+    "fmt"
+    "os"
+    "strconv"
+    "strings"
+)
+
+func main() {
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Print("Enter your marks: ")
+    marksInput, _ := reader.ReadString('\n')
+
+    // Trim the newline character from the input and convert it to an integer
+    marksInput = strings.TrimSpace(marksInput)
+    marks, err := strconv.Atoi(marksInput)
+    if err != nil {
+        fmt.Println("Invalid input. Please enter a valid number.")
+        return
+    }
+
+    switch {
+    case marks > 90:
+        fmt.Println("You got Goa Trip")
+        fallthrough
+    case marks > 80:
+        fmt.Println("You got Bike")
+        fallthrough
+    case marks > 70:
+        fmt.Println("You got Mobile")
+        fallthrough
+    case marks > 60:
+        fmt.Println("You got Ice Cream")
+        fallthrough
+    case marks > 40:
+        fmt.Println("\n\nYou Passed")
+    default:
+        fmt.Println("You have failed")
+    }
+}
+Execution Flow:
+
+If the user enters a value like 85, the program will print:
+Copy code
+You got Bike
+You got Mobile
+You got Ice Cream
+You Passed
+If the user enters 95, the program will print:
+Copy code
+You got Goa Trip
+You got Bike
+You got Mobile
+You got Ice Cream
+You Passed
+This approach correctly implements the use of fallthrough and ensures that the marks are handled as integers for comparison.
+
+
