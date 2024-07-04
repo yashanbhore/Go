@@ -44,7 +44,7 @@ func main() {
 	strmarks, _ := getmarks.ReadString('\n')
 
 	// Trim the newline character from the input and convert it to an integer
-	strmarks = strings.TrimSpace(strmarks)
+	strmarks = strings.TrimSpace(strmarks)  // triming
 	marks, err := strconv.Atoi(strmarks) //Atoi is equivalent to ParseInt(s, 10, 0), converted to type int.
 
 	if err != nil {
