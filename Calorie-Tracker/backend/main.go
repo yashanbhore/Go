@@ -9,7 +9,7 @@ import (
 func main() {
 	port := "8080"
 
-	router := gin.new()
+	router := gin.New()
 	router.Use(gin.Logger())
 	router.Use(cors.Default())
 
@@ -23,5 +23,5 @@ func main() {
 	router.PUT("/entry/update/:id", routes.UpdateEntry)
 	router.DELETE("/entry/delete/:id", routes.DeleteEntry)
 	
-	router.RUN(":"+port)
+	router.Run(":"+port)
 }
