@@ -82,7 +82,7 @@ function addSingleEntry(){
         "ingredients":newEntry.ingredients,
         "dish": newEntry.dish,
         "calories": newEntry.calories,
-        "fat": parseFloat(newEntry.fat)
+        "fat": newEntry.fat
     }).then(response => {
         if(response.status == 200){
             setRefreshData(true)
