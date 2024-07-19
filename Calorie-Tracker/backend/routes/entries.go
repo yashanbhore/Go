@@ -161,6 +161,8 @@ func UpdateEntry(c *gin.Context) {
 		bson.M{
 			"dish":        entry.Dish,
 			"fat":         entry.Fat,
+			"protein":         entry.Protein,
+			"carbohydrates":     entry.Carbohydrates,
 			"ingredients": entry.Ingredients,
 			"calories":    entry.Calories,
 		},

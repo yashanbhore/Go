@@ -65,6 +65,8 @@ const Entries = () => {
 }
 
 function changeSingleEntry(){
+  console.log(newEntry.carbohydrates)
+  console.log(newEntry.protein)
     changeEntry.change = false;
     var url = "http://localhost:8000/entry/update/" + changeEntry.id
     axios.put(url, newEntry)
@@ -76,8 +78,6 @@ function changeSingleEntry(){
 }
 
 function addSingleEntry(){
-  console.log("Entries === >"+newEntry.carbohydrates)
-  console.log("Entries === >"+newEntry.protein)
     setAddNewEntry(false)
     var url = "http://localhost:8000/entry/create"
     axios.post(url, {
