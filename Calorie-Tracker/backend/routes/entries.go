@@ -35,6 +35,8 @@ func AddEntry(c *gin.Context) {
 		return
 	}
 	entry.ID = primitive.NewObjectID()
+	fmt.Println("RESULT ------ >\n",entry.Protein)
+	fmt.Println("RESULT ------ >\n",entry.Carbohydrates)
 	result, insertErr := entryCollection.InsertOne(ctx, entry)
 	if insertErr != nil {
 		msg := fmt.Sprintf("order item was not created")
@@ -47,27 +49,26 @@ func AddEntry(c *gin.Context) {
 }
 
 func GetEntries(c *gin.Context) {
-	var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
+    var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
+    var entries []bson.M
+    cursor, err := entryCollection.Find(ctx, bson.M{})
 
-	var entries []bson.M
-	cursor, err := entryCollection.Find(ctx, bson.M{})
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        fmt.Println(err)
+        return
+    }
 
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		fmt.Println(err)
-		return
-	}
-
-	if err = cursor.All(ctx, &entries); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		fmt.Println(err)
-		return
-	}
-	defer cancel()
-	fmt.Println(entries)
-	c.JSON(http.StatusOK, entries)
-
+    if err = cursor.All(ctx, &entries); err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        fmt.Println(err)
+        return
+    }
+    defer cancel()
+    fmt.Println(entries) // Debugging log
+    c.JSON(http.StatusOK, entries)
 }
+
 
 func GetEntriesByIngredient(c *gin.Context) {
 	ingredient := c.Params.ByName("id")

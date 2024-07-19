@@ -1,44 +1,53 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 
-import 'bootstrap/dist/css/bootstrap.css'
+import "bootstrap/dist/css/bootstrap.css";
 
-import {Button, Card, Row, Col} from 'react-bootstrap'
+import { Button, Card, Row, Col } from "react-bootstrap";
 
-const Entry =({entryData, setChangeIngredient, deleteSingleEntry, setChangeEntry}) => {
-    return(
-        <Card className='p-2'>
-                <Col>Dish:{entryData !== undefined && entryData.dish}</Col>
-                <Col>Ingredients:{entryData !== undefined && entryData.ingredients}</Col>
-                <Col>Calories:{entryData !== undefined && entryData.calories}</Col>
-                <Col>Fat:{entryData !== undefined && entryData.fat}</Col>
+const Entry = ({
+  entryData,
+  setChangeIngredient,
+  deleteSingleEntry,
+  setChangeEntry,
+}) => {
+  return (
+    <Card className="p-2">
+      <Col>Dish: {entryData !== undefined && entryData.dish}</Col>
+      <Col>Ingredients: {entryData !== undefined && entryData.ingredients}</Col>
+      <Col>Calories: {entryData !== undefined && entryData.calories}</Col>
+      <Col>Fat: {entryData !== undefined && entryData.fat}</Col>
+      <Col>Protein: {entryData !== undefined && entryData.protein}</Col>
+      <Col>
+        Carbohydrates: {entryData !== undefined && entryData.carbohydrates}
+      </Col>
 
-                <div className='flex flex-row'>
-                <Col><Button onClick={()=> deleteSingleEntry(entryData._id)}>delete entry</Button></Col>
-                {/* <Col><Button onClick={()=> changeIngredient()}>change ingredients</Button></Col> */}
-                <Col><Button onClick={()=> changeEntry()}>change entry</Button></Col>
-                    
-                </div>
+      <div className="flex flex-row">
+        <Col>
+          <Button onClick={() => deleteSingleEntry(entryData._id)}>
+            delete entry
+          </Button>
+        </Col>
+        {/* <Col><Button onClick={()=> changeIngredient()}>change ingredients</Button></Col> */}
+        <Col>
+          <Button onClick={() => changeEntry()}>change entry</Button>
+        </Col>
+      </div>
+    </Card>
+  );
 
-        </Card>
-    )
+  function changeIngredient() {
+    setChangeIngredient({
+      change: true,
+      id: entryData._id,
+    });
+  }
 
-    function changeIngredient(){
-        setChangeIngredient(
-            {
-                "change": true,
-                "id":entryData._id
-            }
-        )
-    }
+  function changeEntry() {
+    setChangeEntry({
+      change: true,
+      id: entryData._id,
+    });
+  }
+};
 
-    function changeEntry(){
-        setChangeEntry(
-            {
-                "change": true,
-                "id":entryData._id
-            }
-        )
-    }
-}
-
-export default Entry
+export default Entry;

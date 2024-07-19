@@ -76,13 +76,17 @@ function changeSingleEntry(){
 }
 
 function addSingleEntry(){
+  console.log("Entries === >"+newEntry.carbohydrates)
+  console.log("Entries === >"+newEntry.protein)
     setAddNewEntry(false)
     var url = "http://localhost:8000/entry/create"
     axios.post(url, {
         "ingredients":newEntry.ingredients,
         "dish": newEntry.dish,
         "calories": newEntry.calories,
-        "fat": newEntry.fat
+        "fat": newEntry.fat,
+        "protein": newEntry.fat,
+        "carbohydrates": newEntry.fat
     }).then(response => {
         if(response.status == 200){
             setRefreshData(true)
