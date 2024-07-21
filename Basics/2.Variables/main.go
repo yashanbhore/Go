@@ -11,6 +11,11 @@ func main(){
 	var age int = 69
 	var f float32 = 66.8
 
+	x :=3
+
+	fmt.Println(x)
+
+
 
 	// Scan 
 	
